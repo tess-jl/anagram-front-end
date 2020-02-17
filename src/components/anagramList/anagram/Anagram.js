@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from ''
 
-const Anagram = () => {
+const Anagram = ({ word }) => (
+  <section>
+    <p>{word}</p>
+  </section>
+);
 
-  return (
-
-  );
+Anagram.propTypes = {
+  word: PropTypes.string
 };
 
 export default Anagram; 
