@@ -1,5 +1,3 @@
-// import { fetchAnagrams } from '../services/anagramApi';
-
 export const FETCH_ANAGRAMS_LOADING = 'FETCH_ANAGRAMS_LOADING';
 export const fetchAnagramsLoading = () => ({
   type: FETCH_ANAGRAMS_LOADING
