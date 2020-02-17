@@ -42,6 +42,4 @@ describe('anagram reducer tests', () => {
       anagrams: ['hi', 'ih']
     });
   });
-
-
 });
