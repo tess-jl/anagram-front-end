@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
-import reducer from '../reducers/anagramsReducer';
+import anagramsReducer from '../reducers/anagramsReducer';
+import authReducer from '../reducers/anagramsReducer';
 import { fetchAnagrams } from '../services/anagramApi';
 import { fetchAnagramsLoading, fetchAnagramsActionCreator } from '../actions/anagramListActions';
 import { selectAnagrams, selectAnagramsLoading } from '../selectors/anagramsSelectors';
@@ -8,23 +9,29 @@ import { selectAnagrams, selectAnagramsLoading } from '../selectors/anagramsSele
 const AnagramsContext = createContext();
 
 export const AnagramsProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
+  const [anagramState, anagramDispatch] = useReducer(anagramsReducer, {
     loading: false, 
     anagrams: []
   });
 
+  const [authState, authDispatch] = useReducer(authReducer, {
+    loading: false,
+    user: null,
+    error: null
+  });
+
 
   const getAnagrams = word => {
-    dispatch(fetchAnagramsLoading());
+    anagramDispatch(fetchAnagramsLoading());
     return fetchAnagrams(word)
       .then(anagrams => {
-        dispatch(fetchAnagramsActionCreator(anagrams));
+        anagramDispatch(fetchAnagramsActionCreator(anagrams));
       });
     //could implement a catch if we add errors to this reducer
   };
 
   return (
-    <AnagramsContext.Provider value={{ state, getAnagrams }}>
+    <AnagramsContext.Provider value={{ anagramState, getAnagrams, authState }}>
       {children}
     </AnagramsContext.Provider>
   );
@@ -42,11 +49,11 @@ export const useAnagrams = () => {
 
 //use this for tracking the current anagrams
 export const useSelectAnagrams = () => {
-  const { state } = useContext(AnagramsContext);
-  return selectAnagrams(state);
+  const { anagramState } = useContext(AnagramsContext);
+  return selectAnagrams(anagramState);
 };
 
 export const useSelectAnagramsLoading = () => {
-  const { state } = useContext(AnagramsContext);
-  return selectAnagramsLoading(state);
+  const { anagramState } = useContext(AnagramsContext);
+  return selectAnagramsLoading(anagramState);
 };
