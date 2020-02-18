@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext } from 'react';
+import PropTypes from 'prop-types';
 import reducer from '../reducers/anagramsReducer';
 import { fetchAnagrams } from '../services/anagramApi';
 import { fetchAnagramsLoading, fetchAnagramsActionCreator } from '../actions/anagramListActions';
@@ -26,6 +27,10 @@ export const AnagramsProvider = ({ children }) => {
       {children}
     </AnagramsContext.Provider>
   );
+};
+
+AnagramsProvider.propTypes = {
+  children: PropTypes.node
 };
 
 //using this for handle submit in Search.js

@@ -7,7 +7,9 @@ const AnagramsList = () => {
   const anagramsArray = useSelectAnagrams();
   const loading = useSelectAnagramsLoading();
 
-  if(loading) return <Loading />; 
+  const loadingMessage = 'search for an anagram above';
+
+  if(loading) return <Loading message={loadingMessage}/>; 
 
   const anagramsForList = anagramsArray.map(anagram => (
     <li key={anagram}>
