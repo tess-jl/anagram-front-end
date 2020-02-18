@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useContext } from 'react';
 import reducer from '../reducers/anagramsReducer';
 import { fetchAnagrams } from '../services/anagramApi';
 import { fetchAnagramsLoading, fetchAnagramsActionCreator } from '../actions/anagramListActions';
-import { selectAnagrams } from '../selectors/anagramsSelectors';
+import { selectAnagrams, selectAnagramsLoading } from '../selectors/anagramsSelectors';
 
 const AnagramsContext = createContext();
 
@@ -38,4 +38,9 @@ export const useAnagrams = () => {
 export const useSelectAnagrams = () => {
   const { state } = useContext(state);
   return selectAnagrams(state);
+};
+
+export const useSelectAnagramsLoading = () => {
+  const { state } = useContext(state);
+  return selectAnagramsLoading(state);
 };
