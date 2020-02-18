@@ -9,9 +9,10 @@ const AnagramsContext = createContext();
 
 export const AnagramsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
-    loading: true, 
+    loading: false, 
     anagrams: []
   });
+
 
   const getAnagrams = word => {
     dispatch(fetchAnagramsLoading());
