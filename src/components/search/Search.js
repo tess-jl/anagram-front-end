@@ -3,10 +3,11 @@ import { useAnagrams } from '../../hooks/anagrams';
 
 const Search = () => {
   const [wordToAnagram, setWordToAnagram] = useState('');
+  const anagrams = useAnagrams(wordToAnagram);
 
   const handleSubmit = () => {
     event.preventDefault();
-    useAnagrams(wordToAnagram);
+    anagrams;
   };
 
   return (

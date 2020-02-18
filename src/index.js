@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
+import { AnagramsProvider } from './hooks/anagrams';
 
 render(
-  <App />,
+  <AnagramsProvider>
+    <App />
+  </AnagramsProvider>,
   document.getElementById('root')
 );

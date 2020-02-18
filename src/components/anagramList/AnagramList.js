@@ -12,9 +12,12 @@ const AnagramList = () => {
   ));
 
   return (
-    <ul>
-      {anagramsForList}
-    </ul>
+    <>
+      <h2>Here are your anagrams</h2>
+      <ul>
+        {anagramsForList}
+      </ul>
+    </>
   );
 };
 
