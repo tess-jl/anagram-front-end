@@ -1,4 +1,13 @@
-import { } from './authActions';
+import { 
+  fetchAuthLoading, 
+  FETCH_AUTH_LOADING, 
+  fetchVerifyAuthActionCreator, 
+  FETCH_VERIFY_AUTH, 
+  fetchSignupAuthActionCreator, 
+  FETCH_SIGNUP_AUTH, 
+  fetchLoginAuthActionCreator, 
+  FETCH_LOGIN_AUTH 
+} from './authActions';
 
 describe('tests for auth actions', () => {
   it('creates an auth loading actions', () => {
@@ -10,7 +19,7 @@ describe('tests for auth actions', () => {
   });
 
   it('creates an auth verify action', () => {
-    const action = fetchVerifyAuth();
+    const action = fetchVerifyAuthActionCreator();
 
     expect(action).toEqual({
       type: FETCH_VERIFY_AUTH
@@ -18,12 +27,10 @@ describe('tests for auth actions', () => {
   });
 
   it('creates an auth sign up action', () => {
-    const action = fetchSignupAuth({
-      type: FETCH_SIGNUP_AUTH, 
-      payload: {
-        email: 'tess@tess.com',
-        password: 'password'
-      } });
+    const action = fetchSignupAuthActionCreator({
+      email: 'tess@tess.com',
+      password: 'password'
+    });
 
     expect(action).toEqual({
       type: FETCH_SIGNUP_AUTH, 
@@ -35,12 +42,10 @@ describe('tests for auth actions', () => {
   });
 
   it('creates an auth login action', () => {
-    const action = fetchLoginAuth({
-      type: FETCH_LOGIN_AUTH, 
-      payload: {
-        email: 'tess@tess.com',
-        password: 'password'
-      } });
+    const action = fetchLoginAuthActionCreator({
+      email: 'tess@tess.com',
+      password: 'password'
+    });
 
     expect(action).toEqual({
       type: FETCH_LOGIN_AUTH, 
