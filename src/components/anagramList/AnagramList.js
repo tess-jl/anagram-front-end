@@ -1,9 +1,9 @@
 import React from 'react'; 
 import Anagram from './anagram/Anagram';
+import { useSelectAnagrams } from '../../hooks/anagrams';
 
 const AnagramList = () => {
-  //to change later
-  const anagramsArray = ['hi', 'ih'];
+  const anagramsArray = useSelectAnagrams();
 
   const anagramsForList = anagramsArray.map(anagram => (
     <li key={anagram}>

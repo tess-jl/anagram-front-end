@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useAnagrams } from '../../hooks/anagrams';
 
 const Search = () => {
   const [wordToAnagram, setWordToAnagram] = useState('');
 
   const handleSubmit = () => {
     event.preventDefault();
-    //function using wordToAnagram
+    useAnagrams(wordToAnagram);
   };
 
   return (
