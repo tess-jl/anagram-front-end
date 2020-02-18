@@ -4,6 +4,7 @@ import { useSelectAnagrams } from '../../hooks/anagrams';
 
 const AnagramList = () => {
   const anagramsArray = useSelectAnagrams();
+  
 
   const anagramsForList = anagramsArray.map(anagram => (
     <li key={anagram}>

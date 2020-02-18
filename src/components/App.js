@@ -4,16 +4,14 @@ import {
   Route, 
   Switch
 } from 'react-router-dom';
-import Search from './search/Search';
-import AnagramList from './anagramList/AnagramList';
+import SearchAnagramContainer from './searchAnagramContainer/SearchAnagramContainer';
 
 
 export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' component={Search} /> 
-        <Route path='/' component={AnagramList} />
+        <Route path='/' component={SearchAnagramContainer} />
 
       </Switch>
     </Router>

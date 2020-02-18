@@ -7,7 +7,7 @@ const Search = () => {
 
   const handleSubmit = () => {
     event.preventDefault();
-    anagrams;
+    anagrams();
   };
 
   return (

@@ -9,7 +9,7 @@ const AnagramsContext = createContext();
 export const AnagramsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     loading: true, 
-    anagrams: null
+    anagrams: []
   });
 
   const getAnagrams = word => {
@@ -22,7 +22,7 @@ export const AnagramsProvider = ({ children }) => {
   };
 
   return (
-    <AnagramsContext.Provider value={ state, getAnagrams }>
+    <AnagramsContext.Provider value={{ state, getAnagrams }}>
       {children}
     </AnagramsContext.Provider>
   );
@@ -36,11 +36,12 @@ export const useAnagrams = () => {
 
 //use this for tracking the current anagrams
 export const useSelectAnagrams = () => {
-  const { state } = useContext(state);
+  const { state } = useContext(AnagramsContext);
+  console.log(state, 'in useSelectAnagrams');
   return selectAnagrams(state);
 };
 
 export const useSelectAnagramsLoading = () => {
-  const { state } = useContext(state);
+  const { state } = useContext(AnagramsContext);
   return selectAnagramsLoading(state);
 };
