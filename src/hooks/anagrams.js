@@ -37,7 +37,6 @@ export const useAnagrams = () => {
 //use this for tracking the current anagrams
 export const useSelectAnagrams = () => {
   const { state } = useContext(AnagramsContext);
-  console.log(state, 'in useSelectAnagrams');
   return selectAnagrams(state);
 };
 

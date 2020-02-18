@@ -13,7 +13,7 @@ describe('anagram selectors', () => {
   it('selects the anagrams loading state', () => {
     const state = {
       loading: false,
-      anagrams: null
+      anagrams: []
     };
 
     expect(selectAnagramsLoading(state)).toEqual(false);

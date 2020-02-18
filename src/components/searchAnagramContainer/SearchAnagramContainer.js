@@ -1,6 +1,6 @@
 import React from 'react';
-import Search from '../search/Search';
-import AnagramList from '../anagramList/AnagramList';
+import Search from './search/Search';
+import AnagramList from './anagramList/AnagramsList';
 
 const SearchAnagramContainer = () => (
   <>

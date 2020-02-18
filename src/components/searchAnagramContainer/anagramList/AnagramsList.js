@@ -1,9 +1,9 @@
 import React from 'react'; 
 import Anagram from './anagram/Anagram';
-import { useSelectAnagrams, useSelectAnagramsLoading } from '../../hooks/anagrams';
-import Loading from '../loading/Loading';
+import { useSelectAnagrams, useSelectAnagramsLoading } from '../../../hooks/anagrams';
+import Loading from '../../loading/Loading';
 
-const AnagramList = () => {
+const AnagramsList = () => {
   const anagramsArray = useSelectAnagrams();
   const loading = useSelectAnagramsLoading();
 
@@ -11,7 +11,7 @@ const AnagramList = () => {
 
   const anagramsForList = anagramsArray.map(anagram => (
     <li key={anagram}>
-      <Anagram {...anagram} />
+      <Anagram word={anagram} />
     </li>
   ));
 
@@ -25,4 +25,4 @@ const AnagramList = () => {
   );
 };
 
-export default AnagramList;
+export default AnagramsList;
