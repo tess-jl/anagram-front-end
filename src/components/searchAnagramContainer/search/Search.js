@@ -13,7 +13,7 @@ const Search = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Time to Anagram</h2>
-      <input type="text" min='2' max='10' placeholder="word to anagram" onChange={({ target }) => setWordToAnagram(target.value)} /> 
+      <input type="text" minLength="2" maxLength="10" placeholder="word to anagram" onChange={({ target }) => setWordToAnagram(target.value)} /> 
       <button>anagram!</button>
     </form>
   );
