@@ -1,6 +1,12 @@
 import { SET_AUTH_LOADING, SET_SESSION, SET_SESSION_ERROR } from '../actions/authActions';
 
-export default function reducer(state, action) {
+const initialState = {
+  loading: false,
+  user: null,
+  error: null
+};
+
+export default function reducer(state = initialState, action) {
   switch(action.type){
     case SET_AUTH_LOADING:
       return { ...state, loading: true };

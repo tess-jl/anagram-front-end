@@ -1,6 +1,11 @@
 import { FETCH_ANAGRAMS_LOADING, FETCH_ANAGRAMS } from '../actions/anagramListActions';
 
-export default function reducer(state, action) {
+const initialState = {
+  loading: false,
+  anagrams: []
+};
+
+export default function reducer(state = initialState, action) {
   switch(action.type) {
     case FETCH_ANAGRAMS_LOADING:
       return { ...state, loading: true };

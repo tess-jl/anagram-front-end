@@ -10,51 +10,63 @@ import { setAuthLoading, setSession, setSessionError } from '../actions/authActi
 
 const AnagramsContext = createContext();
 
-export const AnagramsProvider = ({ children }) => {
-  const [anagramState, anagramDispatch] = useReducer(anagramsReducer, {
-    loading: false, 
-    anagrams: []
-  });
+const combineReducer = reducerObj => {
+  return function(state, action){
+    return Object.entries(reducerObj).reduce((acc, [key, reducer]) => {
+      acc[key] = reducer(state[key], action);
 
-  const [authState, authDispatch] = useReducer(authReducer, {
-    loading: false,
-    user: null,
-    error: null
+      return acc;
+    }, {});
+  };
+};
+
+export const AnagramsProvider = ({ children }) => {
+  const reducer = combineReducer({ anagram: anagramsReducer, auth: authReducer });
+  const [state, dispatch] = useReducer(reducer, {
+    anagram: {
+      loading: false,
+      anagrams: []
+    },
+    auth: {
+      loading: false,
+      user: null,
+      error: null
+    }
   });
 
   useEffect(() => {
-    authDispatch(setAuthLoading());
+    dispatch(setAuthLoading());
     fetchVerify()
-      .then(user => authDispatch(setSession(user)))
-      .catch(err => authDispatch(setSessionError(err)));
+      .then(user => dispatch(setSession(user)))
+      .catch(err => dispatch(setSessionError(err)));
   }, []);
 
 
   const getAnagrams = word => {
-    anagramDispatch(fetchAnagramsLoading());
+    dispatch(fetchAnagramsLoading());
     return fetchAnagrams(word)
       .then(anagrams => {
-        anagramDispatch(fetchAnagramsActionCreator(anagrams));
+        dispatch(fetchAnagramsActionCreator(anagrams));
       });
     //could implement a catch if we add errors to this reducer
   };
 
   const login = (email, password) => {
-    authDispatch(setAuthLoading());
+    dispatch(setAuthLoading());
     return fetchLogin(email, password)
-      .then(user => authDispatch(setSession(user)))
-      .catch(err => authDispatch(setSessionError(err))); 
+      .then(user => dispatch(setSession(user)))
+      .catch(err => dispatch(setSessionError(err))); 
   };
 
   const signup = (email, password) => {
-    authDispatch(setAuthLoading());
+    dispatch(setAuthLoading());
     return fetchSignup(email, password)
-      .then(user => authDispatch(setSession(user)))
-      .catch(err => authDispatch(setSessionError(err)));
+      .then(user => dispatch(setSession(user)))
+      .catch(err => dispatch(setSessionError(err)));
   };
 
   return (
-    <AnagramsContext.Provider value={{ anagramState, getAnagrams, authState, login, signup }}>
+    <AnagramsContext.Provider value={{  getAnagrams, state, login, signup }}>
       {children}
     </AnagramsContext.Provider>
   );
@@ -72,19 +84,19 @@ export const useAnagrams = () => {
 
 //use this for tracking the current anagrams
 export const useSelectAnagrams = () => {
-  const { anagramState } = useContext(AnagramsContext);
-  return selectAnagrams(anagramState);
+  const { state } = useContext(AnagramsContext);
+  return selectAnagrams(state);
 };
 
 export const useSelectAnagramsLoading = () => {
-  const { anagramState } = useContext(AnagramsContext);
-  return selectAnagramsLoading(anagramState);
+  const { state } = useContext(AnagramsContext);
+  return selectAnagramsLoading(state);
 };
 
 // authState extraction
 export const useSelectUser = () => {
-  const { authState } = useContext(AnagramsContext);
-  return selectUserAuthState(authState);
+  const { state } = useContext(AnagramsContext);
+  return selectUserAuthState(state);
 };
 
 export const useLogin = () => {
@@ -98,11 +110,11 @@ export const useSignup = () => {
 };
 
 export const useSelectAuthLoading = () => {
-  const { authState } = useContext(AnagramsContext);
-  return selectLoadingAuthState(authState);
+  const { state } = useContext(AnagramsContext);
+  return selectLoadingAuthState(state);
 };
 
 export const useSelectVerifyState = () => {
-  const { authState } = useContext(AnagramsContext);
-  return selectVerifyState(authState);
+  const { state } = useContext(AnagramsContext);
+  return selectVerifyState(state);
 };

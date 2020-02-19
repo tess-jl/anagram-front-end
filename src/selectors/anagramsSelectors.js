@@ -1,2 +1,2 @@
-export const selectAnagrams = state => state.anagrams; 
-export const selectAnagramsLoading = state => state.loading; 
+export const selectAnagrams = state => state.anagram.anagrams; 
+export const selectAnagramsLoading = state => state.anagram.loading; 
